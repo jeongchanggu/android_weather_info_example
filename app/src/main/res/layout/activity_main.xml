@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#302e42">
+
+        <TextView
+            android:id="@+id/buildDateTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="buildDateTV"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/dataLoadedFromTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="dataLoadedFromTV"
+            android:textColor="#fff"
+            android:layout_below="@+id/buildDateTV"
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/dataLoadedFromTV">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/areaCodeRV"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+        </ScrollView>
+    </RelativeLayout>
+</layout>
