@@ -23,28 +23,26 @@ import io.realm.RealmList
 
 class WeatherActivity : AppCompatActivity() {
 
-    private var weatherAPIService: WeatherAPIService? = null
-    private var handler: Handler? = null
-    private var weatherBinding: ActivityWeatherBinding? = null
-    private var adapter: RecyclerView.Adapter<*>? = null
+    private lateinit var weatherBinding: ActivityWeatherBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
 
-        supportActionBar!!.hide()
+        supportActionBar?.hide()
+
+        weatherBinding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
 
         val intent = intent
         val cityCode = intent.getStringExtra("cityCode")
 
-        weatherBinding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
-        weatherAPIService = WeatherAPIService()
         receiveWeatherInfo(cityCode)
 
     }
 
     private fun receiveWeatherInfo(_cityCode: String) {
-        handler = object : Handler() {
+        var weatherAPIService = WeatherAPIService()
+        var handler = object : Handler() {
             override fun handleMessage(msg: Message) {
                 val weather = msg.obj as Weather
 
@@ -54,7 +52,7 @@ class WeatherActivity : AppCompatActivity() {
                 setPinpointView(weather.pinpointLocations)
             }
         }
-        weatherAPIService!!.receiveWeatherInfo(handler!!, _cityCode)
+        weatherAPIService.receiveWeatherInfo(handler, _cityCode)
     }
 
     private fun displayTitle(weather: Weather) {
@@ -79,9 +77,10 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun setPinpointView(pinpoints: RealmList<PinpointLocation>?) {
-        weatherBinding!!.pinpointRV.setHasFixedSize(true)
-        adapter = PinpointLocationAdapter(pinpoints!!)
-        weatherBinding!!.pinpointRV.adapter = adapter
-        weatherBinding!!.pinpointRV.layoutManager = LinearLayoutManager(this)
+        pinpoints?.let {
+            weatherBinding.pinpointRV.setHasFixedSize(true)
+            weatherBinding.pinpointRV.adapter = PinpointLocationAdapter(it)
+            weatherBinding.pinpointRV.layoutManager = LinearLayoutManager(this)
+        }
     }
 }

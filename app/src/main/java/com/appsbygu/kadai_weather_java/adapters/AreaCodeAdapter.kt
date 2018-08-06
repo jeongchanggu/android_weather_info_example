@@ -31,18 +31,19 @@ class AreaCodeAdapter(var prefs: RealmList<Pref>) : RecyclerView.Adapter<AreaCod
         holder.prefNameTv.text = prefs[position]?.title ?: ""
 
         val context = holder.itemView.context
-
         val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-
         val linearLayoutChildItems = holder.llChild
+
         linearLayoutChildItems.removeAllViews()
 
-        for (indexView in 0 until prefs[position]!!.cities!!.size) {
-
-            val city = prefs[position]!!.cities!![indexView]
-            val cityTV = createCityTV(context, city!!, indexView)
-            linearLayoutChildItems.addView(cityTV, layoutParams)
-
+        var citiesCnt = prefs[position]?.cities?.size ?: 0
+        for (indexView in 0 until citiesCnt) {
+            prefs[position]?.cities?.let {
+                it[indexView]?.let {
+                    val cityTV = createCityTV(context, it, indexView)
+                    linearLayoutChildItems.addView(cityTV, layoutParams)
+                }
+            }
         }
     }
 

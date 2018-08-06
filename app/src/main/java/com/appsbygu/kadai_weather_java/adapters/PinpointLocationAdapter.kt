@@ -19,8 +19,8 @@ class PinpointLocationAdapter(var pinpoints: RealmList<PinpointLocation>) : Recy
     }
 
     override fun onBindViewHolder(holder: PinpointLocationAdapter.PinpointViewHolder, position: Int) {
-        holder.ppNameTv.text = pinpoints[position]!!.name
-        holder.ppLinkTv.text = pinpoints[position]!!.link
+        holder.ppNameTv.text = pinpoints[position]?.name
+        holder.ppLinkTv.text = pinpoints[position]?.link
     }
 
     override fun getItemCount(): Int {

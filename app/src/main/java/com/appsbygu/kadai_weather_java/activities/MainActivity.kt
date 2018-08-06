@@ -22,28 +22,24 @@ import io.realm.RealmConfiguration
 
 class MainActivity : AppCompatActivity() {
 
-    private var weatherAPIService: WeatherAPIService? = null
-    private var handler: Handler? = null
-    private var mainBinding: ActivityMainBinding? = null
-    private var adapter: RecyclerView.Adapter<*>? = null
-    private var realm: Realm? = null
+    private lateinit var mainBinding: ActivityMainBinding
+    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar!!.hide()
+        supportActionBar?.hide()
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        weatherAPIService = WeatherAPIService()
         initRealm()
         receiveAreaCodesFromRealm()
     }
 
     private fun receiveAreaCodesFromRealm() {
-        val rss = realm!!.where(Rss::class.java).findAll()
-        if (rss.size != 0 && rss.first()!!.isAvailable()) {
+        val rss = realm.where(Rss::class.java).findFirst()
+        if (rss != null && rss.isAvailable()) {
             displayDataLoaded("Rss data loaded from RealmDB　")
-            displayUpdatedTime(rss.first())
-            setAreaCodeView(rss.first()!!)
+            displayUpdatedTime(rss)
+            setAreaCodeView(rss)
         } else {
             displayDataLoaded("Rss data loaded from XML")
             receiveAreaCodesFromXML()
@@ -51,17 +47,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun receiveAreaCodesFromXML() {
-        handler = object : Handler() {
+        var weatherAPIService = WeatherAPIService()
+        var handler = object : Handler() {
             override fun handleMessage(msg: Message) {
                 val rss = msg.obj as Rss
                 displayUpdatedTime(rss)
                 setAreaCodeView(rss)
-                weatherAPIService!!.clearAreaCodeDB(realm!!)
-                weatherAPIService!!.saveAreaCodeDB(realm!!, rss)
+                weatherAPIService.clearAreaCodeDB(realm)
+                weatherAPIService.saveAreaCodeDB(realm, rss)
             }
         }
 
-        weatherAPIService!!.receiveAreaCodes(handler!!)
+        weatherAPIService.receiveAreaCodes(handler)
     }
 
     private fun displayUpdatedTime(rss: Rss?) {
@@ -82,11 +79,11 @@ class MainActivity : AppCompatActivity() {
      * @param rss
      */
     private fun setAreaCodeView(rss: Rss) {
-        val pref = rss!!.channel!!.source!!.prefs!!
-        mainBinding!!.areaCodeRV.setHasFixedSize(false)
-        adapter = AreaCodeAdapter(pref)
-        mainBinding!!.areaCodeRV.adapter = adapter
-        mainBinding!!.areaCodeRV.layoutManager = LinearLayoutManager(this)
+        rss.channel?.source?.prefs?.let {
+            mainBinding.areaCodeRV.setHasFixedSize(false)
+            mainBinding.areaCodeRV.adapter = AreaCodeAdapter(it)
+            mainBinding.areaCodeRV.layoutManager = LinearLayoutManager(this)
+        }
     }
 
     /**
