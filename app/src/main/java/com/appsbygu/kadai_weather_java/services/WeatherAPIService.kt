@@ -1,7 +1,6 @@
 package com.appsbygu.kadai_weather_java.services
 
 import android.os.Handler
-import android.os.Message
 
 import com.appsbygu.kadai_weather_java.interfaces.IWeatherService
 import com.appsbygu.kadai_weather_java.models.apis.Cities.Channel
