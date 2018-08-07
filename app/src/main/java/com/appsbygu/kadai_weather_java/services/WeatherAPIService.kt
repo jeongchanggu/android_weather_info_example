@@ -1,6 +1,7 @@
 package com.appsbygu.kadai_weather_java.services
 
 import android.os.Handler
+import android.os.Message
 
 import com.appsbygu.kadai_weather_java.interfaces.IWeatherService
 import com.appsbygu.kadai_weather_java.models.apis.Cities.Channel
@@ -13,6 +14,7 @@ import java.io.IOException
 
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
+import retrofit2.Call
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -28,43 +30,16 @@ class WeatherAPIService {
         val retrofit = getRetrofit(SimpleXmlConverterFactory.create())
         val service = retrofit.create(IWeatherService::class.java)
         val call = service.listCitis()
-        val msg = handler.obtainMessage()
-
-        object : Thread() {
-            override fun run() {
-                try {
-                    val response = call.execute()
-                    msg.obj = response.body()
-
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
-                handler.sendMessage(msg)
-            }
-        }.start()
+        apiThreadHandler(call, handler)
     }
 
     fun receiveWeatherInfo(handler: Handler, cityCode: String) {
         val retrofit = getRetrofit(GsonConverterFactory.create())
         val service = retrofit.create(IWeatherService::class.java)
-        val call = service!!.weatherInfo(cityCode)
-        val msg = handler.obtainMessage()
-
-        object : Thread() {
-            override fun run() {
-                try {
-                    val response = call.execute()
-                    msg.obj = response.body()
-
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
-                handler.sendMessage(msg)
-            }
-        }.start()
+        val call = service.weatherInfo(cityCode)
+        apiThreadHandler(call, handler)
     }
+
 
     fun clearAreaCodeDB(realm: Realm) {
         realm.executeTransaction { realm ->
@@ -92,5 +67,20 @@ class WeatherAPIService {
                 .addCallAdapterFactory(rxAdapter)
                 .build()
     }
+
+    private fun apiThreadHandler(call: Call<*>, handler: Handler) {
+        val msg = handler.obtainMessage()
+        object : Thread() {
+            override fun run() {
+                try {
+                    msg.obj = call.execute().body()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                handler.sendMessage(msg)
+            }
+        }.start()
+    }
+
 
 }
