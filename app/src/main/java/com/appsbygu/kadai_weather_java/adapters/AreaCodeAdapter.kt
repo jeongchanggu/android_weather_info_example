@@ -36,7 +36,7 @@ class AreaCodeAdapter(var prefs: RealmList<Pref>) : RecyclerView.Adapter<AreaCod
 
         linearLayoutChildItems.removeAllViews()
 
-        var citiesCnt = prefs[position]?.cities?.size ?: 0
+        val citiesCnt = prefs[position]?.cities?.size ?: 0
         for (indexView in 0 until citiesCnt) {
             prefs[position]?.cities?.let {
                 it[indexView]?.let {

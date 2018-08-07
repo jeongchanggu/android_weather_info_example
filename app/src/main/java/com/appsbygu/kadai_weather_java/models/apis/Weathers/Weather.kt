@@ -6,32 +6,32 @@ import com.google.gson.annotations.SerializedName
 import io.realm.RealmList
 import io.realm.RealmObject
 
-open class Weather(
+open class Weather: RealmObject() {
         @SerializedName("pinpointLocations")
         @Expose
-        var pinpointLocations: RealmList<PinpointLocation>? = null,
+        var pinpointLocations: RealmList<PinpointLocation>? = null
 
         @SerializedName("link")
         @Expose
-        var link: String? = null,
+        var link: String? = null
 
         @SerializedName("forecasts")
         @Expose
-        var forecasts: RealmList<Forecast>? = null,
+        var forecasts: RealmList<Forecast>? = null
 
         @SerializedName("publicTime")
         @Expose
-        var publicTime: String? = null,
+        var publicTime: String? = null
 
         @SerializedName("title")
         @Expose
-        var title: String? = null,
+        var title: String? = null
 
         @SerializedName("description")
         @Expose
-        var description: Description? = null,
+        var description: Description? = null
 
         @SerializedName("location")
         @Expose
         var location: Location? = null
-) : RealmObject()
+}

@@ -23,12 +23,11 @@ const val BASE_URL = "http://weather.livedoor.com/"
 
 class WeatherAPIService {
     private val rxAdapter: RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
-    var service: IWeatherService? = null
 
     fun receiveAreaCodes(handler: Handler) {
         val retrofit = getRetrofit(SimpleXmlConverterFactory.create())
-        service = retrofit.create(IWeatherService::class.java)
-        val call = service!!.listCitis()
+        val service = retrofit.create(IWeatherService::class.java)
+        val call = service.listCitis()
         val msg = handler.obtainMessage()
 
         object : Thread() {
@@ -48,7 +47,7 @@ class WeatherAPIService {
 
     fun receiveWeatherInfo(handler: Handler, cityCode: String) {
         val retrofit = getRetrofit(GsonConverterFactory.create())
-        service = retrofit.create(IWeatherService::class.java)
+        val service = retrofit.create(IWeatherService::class.java)
         val call = service!!.weatherInfo(cityCode)
         val msg = handler.obtainMessage()
 

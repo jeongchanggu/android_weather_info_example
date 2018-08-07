@@ -41,8 +41,8 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun receiveWeatherInfo(_cityCode: String) {
-        var weatherAPIService = WeatherAPIService()
-        var handler = object : Handler() {
+        val weatherAPIService = WeatherAPIService()
+        val handler = object : Handler() {
             override fun handleMessage(msg: Message) {
                 val weather = msg.obj as Weather
 
