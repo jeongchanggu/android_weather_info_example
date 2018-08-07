@@ -68,17 +68,11 @@ class WeatherAPIService {
 
     fun clearAreaCodeDB(realm: Realm) {
         realm.executeTransaction { realm ->
-            val rssData = realm.where(Rss::class.java).findAll()
-            val prefData = realm.where(Pref::class.java).findAll()
-            val cityData = realm.where(City::class.java).findAll()
-            val channelData = realm.where(Channel::class.java).findAll()
-            val sourceData = realm.where(Source::class.java).findAll()
-
-            for (rss in rssData) rss.deleteFromRealm()
-            for (pref in prefData) pref.deleteFromRealm()
-            for (city in cityData) city.deleteFromRealm()
-            for (channel in channelData) channel.deleteFromRealm()
-            for (source in sourceData) source.deleteFromRealm()
+            realm.where(Rss::class.java).findAll().deleteAllFromRealm()
+            realm.where(Pref::class.java).findAll().deleteAllFromRealm()
+            realm.where(City::class.java).findAll().deleteAllFromRealm()
+            realm.where(Channel::class.java).findAll().deleteAllFromRealm()
+            realm.where(Source::class.java).findAll().deleteAllFromRealm()
         }
 
     }
