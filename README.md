@@ -13,4 +13,8 @@
 | 説明  | URL |
 |---|---|
 | 地役コード  |  http://weather.livedoor.com/forecast/rss/primary_area.xml  | 
-| お天気情報  | http://weather.livedoor.com/forecast/webservice/json/v1?city=  | 
+| お天気情報  | http://weather.livedoor.com/forecast/webservice/json/v1?city=  |   
+
+
+## CODEBEAT  
+https://codebeat.co/projects/github-com-jeongchanggu-android_weather_info_example-master
