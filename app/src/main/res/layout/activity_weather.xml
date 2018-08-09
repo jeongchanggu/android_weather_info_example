@@ -8,20 +8,19 @@
         android:orientation="vertical"
         android:background="#302e42">
 
-
         <TextView
-            android:id="@+id/titleTV"
+            android:id="@+id/titleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
             android:paddingTop="10dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:background="@drawable/border_right"
-            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:drawableStart="@android:drawable/ic_menu_search"
             android:gravity="center"
-            android:text="TextView"
+            tools:text="TextView"
             android:textColor="#ffffff"
-            android:textSize="22dp"
+            android:textSize="22sp"
             tools:drawableLeft="#ff236a" />
 
         <android.support.v4.widget.NestedScrollView
@@ -33,40 +32,33 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp">
-
-                    <TextView
-                        android:id="@+id/locationTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:paddingRight="5dp"
-                        android:paddingLeft="5dp"
-                        android:paddingBottom="2dp"
-                        android:text="textViewLocation"
-                        android:background="@drawable/border_bottom"
-                        android:textColor="#ffffff"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:layout_editor_absoluteY="0dp" />
-
-                </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/locationTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="2dp"
+                    tools:text="textViewLocation"
+                    android:background="@drawable/border_bottom"
+                    android:textColor="#ffffff"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="0dp" />
 
                 <TextView
-                    android:id="@+id/descriptionTV"
+                    android:id="@+id/descriptionTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    tools:text="TextView"
                     android:textColor="#ffffff" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="関連情報"
+                    android:text="@string/relative_information"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"/>
                 <android.support.v7.widget.RecyclerView

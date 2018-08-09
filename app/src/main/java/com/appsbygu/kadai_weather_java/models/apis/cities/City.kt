@@ -1,4 +1,4 @@
-package com.appsbygu.kadai_weather_java.models.apis.Cities
+package com.appsbygu.kadai_weather_java.models.apis.cities
 
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Root

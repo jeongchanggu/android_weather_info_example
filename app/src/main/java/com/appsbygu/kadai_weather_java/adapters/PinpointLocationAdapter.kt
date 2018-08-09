@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.appsbygu.kadai_weather_java.R
-import com.appsbygu.kadai_weather_java.models.apis.Weathers.PinpointLocation
+import com.appsbygu.kadai_weather_java.models.apis.weathers.PinpointLocation
 
 import io.realm.RealmList
 
@@ -19,8 +19,8 @@ class PinpointLocationAdapter(var pinpoints: RealmList<PinpointLocation>) : Recy
     }
 
     override fun onBindViewHolder(holder: PinpointLocationAdapter.PinpointViewHolder, position: Int) {
-        holder.ppNameTv.text = pinpoints[position]?.name
-        holder.ppLinkTv.text = pinpoints[position]?.link
+        holder.pinpointNameTextView.text = pinpoints[position]?.name
+        holder.pinpointLinkTextView.text = pinpoints[position]?.link
     }
 
     override fun getItemCount(): Int {
@@ -29,8 +29,8 @@ class PinpointLocationAdapter(var pinpoints: RealmList<PinpointLocation>) : Recy
 
     class PinpointViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val ppNameTv: TextView = itemView.findViewById<View>(R.id.ppNameTv) as TextView
-        val ppLinkTv: TextView = itemView.findViewById<View>(R.id.ppLinkTv) as TextView
+        val pinpointNameTextView: TextView = itemView.findViewById(R.id.pinpointNameTextView)
+        val pinpointLinkTextView: TextView = itemView.findViewById(R.id.pinpointLinkTextView)
 
     }
 

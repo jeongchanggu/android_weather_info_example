@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">kadai_weather_java</string>
+
+    <string name="show_update_prefix">Update</string>
+    <string name="rss_data_from_realm">Rss data loaded from RealmDB</string>
+    <string name="rss_data_from_xml">Rss data loaded from XML</string>
+    <string name="relative_information">関連情報</string>
+
+    <!-- Error Toast-->
+    <string name="data_load_error">データー読み込みに失敗しました。</string>
 </resources>

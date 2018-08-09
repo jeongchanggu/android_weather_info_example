@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#302e42">
 
         <TextView
-            android:id="@+id/buildDateTV"
+            android:id="@+id/buildDateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="buildDateTV"
+            tools:text="buildDateTextView"
             android:textColor="#fff"/>
 
         <TextView
-            android:id="@+id/dataLoadedFromTV"
+            android:id="@+id/dataLoadedFromTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="dataLoadedFromTV"
+            tools:text="dataLoadedFromTextView"
             android:textColor="#fff"
-            android:layout_below="@+id/buildDateTV"
+            android:layout_below="@+id/buildDateTextView"
             />
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/dataLoadedFromTV">
+            android:layout_below="@+id/dataLoadedFromTextView">
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/areaCodeRV"
+                android:id="@+id/areaCodeRecyclerView"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </android.support.v7.widget.RecyclerView>
-        </ScrollView>
+        </LinearLayout>
+
     </RelativeLayout>
 </layout>

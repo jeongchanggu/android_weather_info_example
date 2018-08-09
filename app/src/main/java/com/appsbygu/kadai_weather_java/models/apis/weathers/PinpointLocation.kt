@@ -1,4 +1,4 @@
-package com.appsbygu.kadai_weather_java.models.apis.Weathers
+package com.appsbygu.kadai_weather_java.models.apis.weathers
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

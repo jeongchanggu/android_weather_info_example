@@ -1,4 +1,4 @@
-package com.appsbygu.kadai_weather_java.models.apis.Cities
+package com.appsbygu.kadai_weather_java.models.apis.cities
 
 import com.google.gson.annotations.SerializedName
 
@@ -18,8 +18,6 @@ open class Rss : RealmObject() {
     @field:Attribute(name = "version", required = false)
     var version: String? = null
 
-//    @Element(required = false)
-//    @JvmField
     @field:Attribute(name = "savedTimeStamp", required = false)
     var savedTimeStamp: Long = 0
 
